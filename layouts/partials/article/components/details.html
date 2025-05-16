@@ -39,12 +39,29 @@
 
         {{ if $showReadingTime }}
             <div>
+            •
+            </div>
+            <div>
                 {{ partial "helper/icon" "clock" }}
                 <time class="article-time--reading">
                     {{ T "article.readingTime" .ReadingTime }}
                 </time>
             </div>
         {{ end }}
+
+        <!-- show author name -->
+        {{ with .Params.author }}
+            <div>
+            •
+            </div>
+            <div class="article-author">
+                {{ partial "helper/icon" "author" }}
+                <time class="article-time--author">
+                    {{ . }}
+                </time>
+            </div>
+        {{ end }}
+
     </footer>
     {{ end }}
 

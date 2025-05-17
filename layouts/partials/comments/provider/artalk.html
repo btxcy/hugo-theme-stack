@@ -1,0 +1,27 @@
+<link href='{{ .Site.Params.comments.artalk.css }}' rel="stylesheet"/>
+<script src='{{ .Site.Params.comments.artalk.js }}'></script>
+
+<!-- can be commented out if not using above -->
+<link href="/lib/artalk/Artalk.css" rel="stylesheet" />
+<script src="/lib/artalk/Artalk.js"></script>
+
+<div id="Comments"></div>
+
+<script>
+  Artalk.init({
+    el: '#Comments',
+    pageKey: '{{ .Permalink }}',
+    pageTitle: '{{ .Title }}',
+    server: '{{ .Site.Params.comments.artalk.server }}',
+    site: '{{ .Site.Params.comments.artalk.site }}',
+    // ...your additional configuration
+  })
+</script>
+
+<!-- params:
+    comments:
+        artalk:
+        server: 'artalk server url'
+        site: 'site name'
+        css: 'https://<artalk server url>/artalk/dist/Artalk.css'
+        js: 'https://<artalk server url>/artalk/dist/Artalk.js' -->

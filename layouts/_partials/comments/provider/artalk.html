@@ -1,0 +1,48 @@
+<!-- <link href='{{ .Site.Params.comments.artalk.css }}' rel="stylesheet"/>
+<script src='{{ .Site.Params.comments.artalk.js }}'></script> -->
+
+
+
+<!-- <link href="/lib/artalk/Artalk.css" rel="stylesheet" />
+<script src="/lib/artalk/Artalk.js"></script> -->
+
+{{ $artalkCSS := resources.Get "css/artalk.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $artalkCSS.RelPermalink }}" integrity="{{ $artalkCSS.Data.Integrity }}" crossorigin="anonymous">
+
+{{ $artalkJS := resources.Get "js/artalk.js" | minify | fingerprint }}
+<script src="{{ $artalkJS.RelPermalink }}" integrity="{{ $artalkJS.Data.Integrity }}" crossorigin="anonymous"></script>
+
+<!-- Artalk -->
+<div id="Comments"></div>
+
+
+<script>
+
+  const artalk = Artalk.init({
+    el: '#Comments',
+    pageKey: '{{ .Permalink }}',
+    pageTitle: '{{ .Title }}',
+    server: '{{ .Site.Params.comments.artalk.server }}',
+    site: '{{ .Site.Params.comments.artalk.site }}',
+  });
+  
+  (function listener() {
+    addEventListener("message", (e) => {
+      if (event.origin !== '{{ .Site.Params.comments.artalk.server }}') {
+        return;
+      }
+      setThemeColor();
+    });
+    window.addEventListener("onColorSchemeChange", setThemeColor);
+
+    function setThemeColor() {
+      if (document.documentElement.dataset.scheme === "light") {
+        artalk.setDarkMode(false);
+      } 
+      else {
+        artalk.setDarkMode(true);
+      }
+    }
+  })();
+
+</script>

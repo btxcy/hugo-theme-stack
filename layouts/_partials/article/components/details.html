@@ -46,10 +46,26 @@
                 {{ end }}
 
                 {{ if $showReadingTime }}
+                    <div>
+                    •
+                    </div>
                     {{ partial "helper/icon" "clock" }}
                     <time class="article-time--reading">
                         {{ T "article.readingTime" $Page.ReadingTime }}
                     </time>
+                {{ end }}
+
+                <!-- Show author name -->
+                {{ with $Page.Params.author }}
+                    <div>
+                    •
+                    </div>
+                    <div class="article-author">
+                        {{ partial "helper/icon" "author" }}
+                        <time class="article-time--author">
+                            {{ . }}
+                        </time>
+                    </div>
                 {{ end }}
             </div>
         {{ end }}
